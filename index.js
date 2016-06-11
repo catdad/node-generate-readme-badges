@@ -3,6 +3,7 @@ var argv = require('yargs').argv;
 
 var badgesString = `
 [![Build][1]][2]
+[![Test Coverage][3]][4]
 [![Code Climate][5]][6]
 [![Downloads][7]][8]
 [![Version][9]][8]
@@ -10,6 +11,9 @@ var badgesString = `
 
 [1]: https://travis-ci.org/catdad/{{name}}.svg?branch=master
 [2]: https://travis-ci.org/catdad/{{name}}
+
+[3]: https://codeclimate.com/github/catdad/{{name}}/badges/coverage.svg
+[4]: https://codeclimate.com/github/catdad/{{name}}/coverage
 
 [5]: https://codeclimate.com/github/{{user}}/{{name}}/badges/gpa.svg
 [6]: https://codeclimate.com/github/{{user}}/{{name}}
