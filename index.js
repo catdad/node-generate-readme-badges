@@ -24,8 +24,7 @@ if (
 ) {
 
     var parsedRepo = url.parse(pkg.repository.url);
-    var path = parsedRepo.path;
-    var tokens = path.split('/').filter( v => !!v );
+    var tokens = parsedRepo.path.split('/').filter( v => !!v );
     
     USER = USER || tokens[0];
 }
