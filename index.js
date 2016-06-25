@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* jshint node: true, esversion: 6 */
 
 var url = require('url');

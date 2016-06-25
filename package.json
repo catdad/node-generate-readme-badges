@@ -19,6 +19,9 @@
   "dependencies": {
     "yargs": "^4.7.1"
   },
+  "bin": {
+    "badges": "./index.js"
+  },
   "engines": {
     "node": ">=4.0.0"
   }
