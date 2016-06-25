@@ -31,7 +31,7 @@ if (
 }
 
 // because why not
-var badgesString = `
+console.log(`
 [![Build][1]][2]
 [![Test Coverage][3]][4]
 [![Code Climate][5]][6]
@@ -54,6 +54,4 @@ var badgesString = `
 
 [10]: https://david-dm.org/${USER}/${NAME}.svg
 [11]: https://david-dm.org/${USER}/${NAME}
-`;
-
-console.log(badgesString);
+`);
