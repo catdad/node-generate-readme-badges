@@ -19,12 +19,12 @@ if (
     pkg.repository &&
     pkg.repository.url &&
     pkg.repository.type === 'git' &&
-    !/github\.com\//.test(pkg.repository.url)
+    /github\.com\//.test(pkg.repository.url)
 ) {
 
     var parsedRepo = url.parse(pkg.repository.url);
     var path = parsedRepo.path;
-    var tokens = path.split('/').filter(function(v) { return !!v; });
+    var tokens = path.split('/').filter( v => !!v );
     
     USER = USER || tokens[0];
 }
