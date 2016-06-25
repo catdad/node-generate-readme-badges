@@ -4,12 +4,13 @@ var url = require('url');
 
 var argv = require('yargs').argv;
 
-var pkg = {};
-
-try {
-    pkg = require(argv.package || './package.json');
-} catch(e) {
-}
+var pkg = function() {
+    try {
+        return require(argv.package || './package.json');
+    } catch(e) {
+        return {};
+    }
+}();
 
 var USER = process.env.USER || argv.user;
 var NAME = process.env.NAME || argv.name || pkg.name;
