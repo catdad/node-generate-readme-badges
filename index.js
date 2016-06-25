@@ -1,6 +1,5 @@
 /* jshint node: true, esversion: 6 */
 
-var _ = require('lodash');
 var argv = require('yargs').argv;
 
 var pkg = {};
