@@ -3,6 +3,16 @@
 var _ = require('lodash');
 var argv = require('yargs').argv;
 
+var pkg = {};
+
+try {
+    pkg = require(argv.package || './package.json');
+} catch(e) {
+}
+
+var USER = process.env.USER || argv.user;
+var NAME = process.env.NAME || argv.name || pkg.name;
+
 // because why not
 var badgesString = `
 [![Build][1]][2]
@@ -12,41 +22,21 @@ var badgesString = `
 [![Version][9]][8]
 [![Dependency Status][10]][11]
 
-[1]: https://travis-ci.org/catdad/{{name}}.svg?branch=master
-[2]: https://travis-ci.org/catdad/{{name}}
+[1]: https://travis-ci.org/${USER}/${NAME}.svg?branch=master
+[2]: https://travis-ci.org/${USER}/${NAME}
 
-[3]: https://codeclimate.com/github/catdad/{{name}}/badges/coverage.svg
-[4]: https://codeclimate.com/github/catdad/{{name}}/coverage
+[3]: https://codeclimate.com/github/${USER}/${NAME}/badges/coverage.svg
+[4]: https://codeclimate.com/github/${USER}/${NAME}/coverage
 
-[5]: https://codeclimate.com/github/{{user}}/{{name}}/badges/gpa.svg
-[6]: https://codeclimate.com/github/{{user}}/{{name}}
+[5]: https://codeclimate.com/github/${USER}/${NAME}/badges/gpa.svg
+[6]: https://codeclimate.com/github/${USER}/${NAME}
 
-[7]: https://img.shields.io/npm/dm/{{name}}.svg
-[8]: https://www.npmjs.com/package/{{name}}
-[9]: https://img.shields.io/npm/v/{{name}}.svg
+[7]: https://img.shields.io/npm/dm/${NAME}.svg
+[8]: https://www.npmjs.com/package/${NAME}
+[9]: https://img.shields.io/npm/v/${NAME}.svg
 
-[10]: https://david-dm.org/{{user}}/{{name}}.svg
-[11]: https://david-dm.org/{{user}}/{{name}}
+[10]: https://david-dm.org/${USER}/${NAME}.svg
+[11]: https://david-dm.org/${USER}/${NAME}
 `;
 
-_.templateSettings = {
-    evaluate : /\{\[([\s\S]+?)\]\}/g,
-    interpolate : /\{\{([\s\S]+?)\}\}/g
-};
-
-var template = _.template(badgesString);
-
-var pkg = {};
-
-try {
-    pkg = require('./package.json');
-} catch(e) {
-}
-
-var USER = process.env.USER || argv.user || 'catdad';
-var NAME = process.env.NAME || argv.name || pkg.name;
-
-console.log(template({
-    name: NAME,
-    user: USER
-}));
+console.log(badgesString);
