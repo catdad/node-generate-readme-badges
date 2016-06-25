@@ -1,6 +1,9 @@
+/* jshint node: true, esversion: 6 */
+
 var _ = require('lodash');
 var argv = require('yargs').argv;
 
+// because why not
 var badgesString = `
 [![Build][1]][2]
 [![Test Coverage][3]][4]
