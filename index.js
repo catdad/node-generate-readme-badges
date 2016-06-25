@@ -1,5 +1,7 @@
 /* jshint node: true, esversion: 6 */
 
+var url = require('url');
+
 var argv = require('yargs').argv;
 
 var pkg = {};
@@ -11,6 +13,21 @@ try {
 
 var USER = process.env.USER || argv.user;
 var NAME = process.env.NAME || argv.name || pkg.name;
+
+// attempt to figure out username from package repo
+if (
+    pkg.repository &&
+    pkg.repository.url &&
+    pkg.repository.type === 'git' &&
+    !/github\.com\//.test(pkg.repository.url)
+) {
+
+    var parsedRepo = url.parse(pkg.repository.url);
+    var path = parsedRepo.path;
+    var tokens = path.split('/').filter(function(v) { return !!v; });
+    
+    USER = USER || tokens[0];
+}
 
 // because why not
 var badgesString = `
