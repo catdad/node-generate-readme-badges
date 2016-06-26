@@ -2,12 +2,15 @@
 /* jshint node: true, esversion: 6 */
 
 var url = require('url');
+var path = require('path');
 
 var argv = require('yargs').argv;
 
 var pkg = function() {
+    var pkgPath = path.resolve(process.cwd(), 'package.json');
+    
     try {
-        return require(argv.package || './package.json');
+        return require(argv.package || pkgPath);
     } catch(e) {
         return {};
     }
