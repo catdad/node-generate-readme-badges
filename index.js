@@ -33,28 +33,72 @@ if (
     USER = USER || tokens[0];
 }
 
+var regex = /this is a regex/;
+
+var badges = {
+  travis: {
+    svg: `https://travis-ci.org/${USER}/${NAME}.svg?branch=master`,
+    link: `https://travis-ci.org/${USER}/${NAME}`
+  },
+  'cov-codeclimate': {
+    svg: `https://codeclimate.com/github/${USER}/${NAME}/badges/coverage.svg`,
+    link: `https://codeclimate.com/github/${USER}/${NAME}/coverage`
+  },
+  'gpa-codeclimate': {
+    svg: `https://codeclimate.com/github/${USER}/${NAME}/badges/gpa.svg`,
+    link: `https://codeclimate.com/github/${USER}/${NAME}`
+  },
+  'npm-downloads': {
+    svg: `https://img.shields.io/npm/dm/${NAME}.svg`,
+    link: ['npm', `https://www.npmjs.com/package/${NAME}`]
+  },
+  'npm-version': {
+    svg: `https://img.shields.io/npm/v/${NAME}.svg`,
+    link: ['npm', `https://www.npmjs.com/package/${NAME}`]
+  },
+  'dm-david': {
+    svg: `https://david-dm.org/${USER}/${NAME}.svg`,
+    link: `https://david-dm.org/${USER}/${NAME}`
+  }
+};
+
+function getLink(name, type, val) {
+  if (Array.isArray(val)) {
+    return { name: `${val[0]}.${type}`, val: val[1] };
+  }
+  
+  return getLink(null, type, [name, val]);
+}
+
+function serializeBadge(name, svg, link) {
+  return `[![${name}][${svg.name}]][${link.name}]`;
+}
+
+function serializeLink(link) {
+  return `[${link.name}]: ${link.val}`;
+}
+
+function buildLinks(badges) {
+  return Object.keys(badges).reduce((memo, name) => {
+    var val = badges[name];
+    
+    var svg = getLink(name, 'svg', val.svg);
+    var link = getLink(name, 'link', val.link);
+    
+    memo.badges.add(serializeBadge(name, svg, link));
+    memo.list.add(serializeLink(svg));
+    memo.list.add(serializeLink(link));
+    
+    return memo;
+  }, {
+    badges: new Set(),
+    list: new Set()
+  });
+}
+
+function serializeLinksList(links) {
+  return [...links.badges].join('\n') + '\n\n' + [...links.list].join('\n');
+}
+
 // because why not
-console.log(`
-[![Build][travis.svg]][travis.link]
-[![Test Coverage][cov-codeclimate.svg]][cov-codeclimate.link]
-[![Code Climate][gpa-codeclimate.svg]][gpa-codeclimate.link]
-[![Downloads][npm-downloads.svg]][npm.link]
-[![Version][npm-version.svg]][npm.link]
-[![Dependency Status][dm-david.svg]][dm-david.link]
-
-[travis.svg]: https://travis-ci.org/${USER}/${NAME}.svg?branch=master
-[travis.link]: https://travis-ci.org/${USER}/${NAME}
-
-[cov-codeclimate.svg]: https://codeclimate.com/github/${USER}/${NAME}/badges/coverage.svg
-[cov-codeclimate.link]: https://codeclimate.com/github/${USER}/${NAME}/coverage
-
-[gpa-codeclimate.svg]: https://codeclimate.com/github/${USER}/${NAME}/badges/gpa.svg
-[gpa-codeclimate.link]: https://codeclimate.com/github/${USER}/${NAME}
-
-[npm-downloads.svg]: https://img.shields.io/npm/dm/${NAME}.svg
-[npm.link]: https://www.npmjs.com/package/${NAME}
-[npm-version.svg]: https://img.shields.io/npm/v/${NAME}.svg
-
-[dm-david.svg]: https://david-dm.org/${USER}/${NAME}.svg
-[dm-david.link]: https://david-dm.org/${USER}/${NAME}
-`);
+console.log(serializeLinksList(buildLinks(badges)));
