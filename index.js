@@ -97,7 +97,7 @@ function buildLinks(badges) {
 }
 
 function serializeLinksList(links) {
-  return [...links.badges].join('\n') + '\n\n' + [...links.list].join('\n');
+  return Array.from(links.badges).join('\n') + '\n\n' + Array.from(links.list).join('\n');
 }
 
 // because why not
