@@ -16,8 +16,8 @@ var pkg = function() {
     }
 }();
 
-var USER = process.env.USER || argv.user;
-var NAME = process.env.NAME || argv.name || pkg.name;
+var USER = argv.user || process.env.USER;
+var NAME = argv.name || process.env.NAME || pkg.name;
 
 // attempt to figure out username from package repo
 if (
