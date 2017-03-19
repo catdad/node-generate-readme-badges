@@ -40,6 +40,10 @@ var badges = {
     svg: `https://travis-ci.org/${USER}/${NAME}.svg?branch=master`,
     link: `https://travis-ci.org/${USER}/${NAME}`
   },
+  appveyor: {
+    svg: `https://ci.appveyor.com/api/projects/status/github/${USER}/${NAME}?branch=master&svg=true`,
+    link: `https://ci.appveyor.com/project/${USER}/${NAME}`
+  },
   'cov-codeclimate': {
     svg: `https://codeclimate.com/github/${USER}/${NAME}/badges/coverage.svg`,
     link: `https://codeclimate.com/github/${USER}/${NAME}/coverage`
