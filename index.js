@@ -7,13 +7,13 @@ var path = require('path');
 var argv = require('yargs').argv;
 
 var pkg = function() {
-    var pkgPath = path.resolve(process.cwd(), 'package.json');
-    
-    try {
-        return require(argv.package || pkgPath);
-    } catch(e) {
-        return {};
-    }
+  var pkgPath = path.resolve(process.cwd(), 'package.json');
+
+  try {
+    return require(argv.package || pkgPath);
+  } catch(e) {
+    return {};
+  }
 }();
 
 var USER = argv.user || process.env.USER;
@@ -21,16 +21,16 @@ var NAME = argv.name || process.env.NAME || pkg.name;
 
 // attempt to figure out username from package repo
 if (
-    pkg.repository &&
-    pkg.repository.url &&
-    pkg.repository.type === 'git' &&
-    /github\.com\//.test(pkg.repository.url)
+  pkg.repository &&
+  pkg.repository.url &&
+  pkg.repository.type === 'git' &&
+  /github\.com\//.test(pkg.repository.url)
 ) {
 
-    var parsedRepo = url.parse(pkg.repository.url);
-    var tokens = parsedRepo.path.split('/').filter( v => !!v );
-    
-    USER = USER || tokens[0];
+  var parsedRepo = url.parse(pkg.repository.url);
+  var tokens = parsedRepo.path.split('/').filter( v => !!v );
+
+  USER = USER || tokens[0];
 }
 
 var regex = /this is a regex/;
@@ -66,7 +66,7 @@ function getLink(name, type, val) {
   if (Array.isArray(val)) {
     return { name: `${val[0]}.${type}`, val: val[1] };
   }
-  
+
   return getLink(null, type, [name, val]);
 }
 
@@ -81,14 +81,14 @@ function serializeLink(link) {
 function buildLinks(badges) {
   return Object.keys(badges).reduce((memo, name) => {
     var val = badges[name];
-    
+
     var svg = getLink(name, 'svg', val.svg);
     var link = getLink(name, 'link', val.link);
-    
+
     memo.badges.add(serializeBadge(name, svg, link));
     memo.list.add(serializeLink(svg));
     memo.list.add(serializeLink(link));
-    
+
     return memo;
   }, {
     badges: new Set(),
