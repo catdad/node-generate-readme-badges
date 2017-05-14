@@ -48,9 +48,17 @@ var badges = {
     svg: `https://codeclimate.com/github/${USER}/${NAME}/badges/coverage.svg`,
     link: `https://codeclimate.com/github/${USER}/${NAME}/coverage`
   },
-  'gpa-codeclimate': {
+  'cov-coveralls': {
+    svg: `https://img.shields.io/coveralls/${USER}/${NAME}.svg`,
+    link: `https://coveralls.io/github/${USER}/${NAME}?branch=master`
+  },
+  'score-codeclimate': {
     svg: `https://codeclimate.com/github/${USER}/${NAME}/badges/gpa.svg`,
     link: `https://codeclimate.com/github/${USER}/${NAME}`
+  },
+  'score-bithound': {
+    svg: `https://www.bithound.io/github/${USER}/${NAME}/badges/score.svg`,
+    link: `https://www.bithound.io/github/${USER}/${NAME}`
   },
   'npm-downloads': {
     svg: `https://img.shields.io/npm/dm/${NAME}.svg`,
@@ -63,14 +71,6 @@ var badges = {
   'dm-david': {
     svg: `https://david-dm.org/${USER}/${NAME}.svg`,
     link: `https://david-dm.org/${USER}/${NAME}`
-  },
-  bithound: {
-    svg: `https://www.bithound.io/github/${USER}/${NAME}/badges/score.svg`,
-    link: `https://www.bithound.io/github/${USER}/${NAME}`
-  },
-  coveralls: {
-    svg: `https://img.shields.io/coveralls/${USER}/${NAME}.svg`,
-    link: `https://coveralls.io/github/${USER}/${NAME}?branch=master`
   }
 };
 
