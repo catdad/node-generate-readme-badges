@@ -63,6 +63,10 @@ var badges = {
   'dm-david': {
     svg: `https://david-dm.org/${USER}/${NAME}.svg`,
     link: `https://david-dm.org/${USER}/${NAME}`
+  },
+  bithound: {
+    svg: `https://www.bithound.io/github/${USER}/${NAME}/badges/score.svg`,
+    link: `https://www.bithound.io/github/${USER}/${NAME}`
   }
 };
 
