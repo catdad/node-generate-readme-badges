@@ -67,6 +67,10 @@ var badges = {
   bithound: {
     svg: `https://www.bithound.io/github/${USER}/${NAME}/badges/score.svg`,
     link: `https://www.bithound.io/github/${USER}/${NAME}`
+  },
+  coveralls: {
+    svg: `https://img.shields.io/coveralls/${USER}/${NAME}.svg`,
+    link: `https://coveralls.io/github/${USER}/${NAME}?branch=master`
   }
 };
 
